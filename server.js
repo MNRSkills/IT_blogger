@@ -2,12 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const app = express();
-app.use(express.json());
+const app = express();//express instant
+app.use(express.json());//new body-parser
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT; //best practice makes me have a default port
 
-mongoose.connect(`${process.env.MONGO_DB}`, {
+mongoose.connect(`${process.env.MONGO_DB}`, {//making the connection to mongodb atlas
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -17,6 +17,9 @@ connection.once("open", () => {
   console.log("MONGODB is established successfully");
 });
 
+
+//WE WILL NOW EXTEND THE PATH TO ANOTHER FILE (GOTTA CHECK ON WHAT ELST TO CALL IT)
+//CREATE THE MODEL MONGOOSE SCHEMA AND ROUTES
 app.listen(PORT, () => {
   console.log(`The server is up on port: ${PORT}`);
 });
