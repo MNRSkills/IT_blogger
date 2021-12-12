@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const contactSchema = new Schema({
-    email: {type: String },
+    email: {type: String, unique: true },
     twitter_handle: {type: String},
     facebook_page: {type: String},
     linkedin_page: { type: String }
@@ -26,3 +26,5 @@ const author = new Schema({
     blog_posts: [{Blog_posts}]
 })
 
+
+module.exports = mongoose.model("Blog_posts", author);
