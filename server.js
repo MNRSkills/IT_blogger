@@ -1,13 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const authorRouter = require("./route/blogs");
+const blogRouter = require("./route/blogs");
 require("dotenv").config();
 
 const app = express();//express instant
 app.use(express.json());//new body-parser
-app.use("/test", (req,res) => {
-    res.send("hello world");
-})
+
 
 const PORT = process.env.PORT; //best practice makes me have a default port
 
@@ -26,7 +24,7 @@ connection.once("open", () => {
 //MODELS ARE BUILT AND ROUTES ARE CREATED CONNECTING BELOW
 
 
-app.use("/blogs", authorRouter);
+app.use("/blogs", blogRouter);
 
 
 //APP LISTENER FOR NODEMON CONFIRMATION
