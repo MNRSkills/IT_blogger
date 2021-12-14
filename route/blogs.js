@@ -2,11 +2,17 @@ const blogRouter = require("express").Router();
 const authorBlog = require("../model/posts");
 
 blogRouter.get("/", async (req, res) => {
-  try {
-    res.send("Hello Mom");
-  } catch (error) {
-    res.send(`${error}`);
-  }
+    authorBlog.find((err, items) => {
+        if (err){
+          res.status(401).json({
+            msg: err
+          })
+        }else{
+          res.status(200).json({
+            response: items
+          })
+        }
+      })
 });
 
 blogRouter.post("/post", async (req, res) => {
