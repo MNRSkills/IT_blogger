@@ -1,35 +1,41 @@
 const blogRouter = require("express").Router();
-const authorBlog = require("../model/posts");
+const BlogPost = require("../model/blogs");
+const { ObjectId } = require("mongodb");
 
 blogRouter.get("/", async (req, res) => {
-    authorBlog.find((err, items) => {
-        if (err){
-          res.status(401).json({
-            msg: err
-          })
-        }else{
-          res.status(200).json({
-            response: items
-          })
-        }
-      })
+  BlogPost.find((err, items) => {
+    if (err) {
+      res.status(401).json({
+        msg: err,
+      });
+    } else {
+      res.status(200).json({
+        response: items,
+      });
+    }
+  });
 });
 
-blogRouter.post("/post", async (req, res) => {
-  const newPost = new authorBlog({
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    contact: req.body.contact,
-    blog_posts: req.body.blog_posts,
+
+blogRouter.post("/test", (req, res) => {
+  console.log("REQ:", req.body);
+  const post = new BlogPost({
+    title: req.body.title,
+    subtitle: req.body.subtitle,
+    author: [{
+      fName: req.body.author.fName,
+      phone: req.body.author.phone,
+      email: req.body.author.email
+    }]
   });
-  await newPost
+  post
     .save()
-    .then((post) =>
+    .then((post) => {
       res.status(200).json({
-        msg: "Blog post is up",
-        blogPost: post,
-      })
-    )
+        msg: "this message is if you pass",
+        POST: post,
+      });
+    })
     .catch((err) => {
       res.status(400).json({
         ErrorMSG: "This didn't work ty again",

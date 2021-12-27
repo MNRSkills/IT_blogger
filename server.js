@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const blogRouter = require("./route/blogs");
+const writterRouter = require("./route/writter")
 require("dotenv").config();
 
 const app = express();//express instant
@@ -25,6 +26,7 @@ connection.once("open", () => {
 
 
 app.use("/blogs", blogRouter);
+app.use("/writter", writterRouter);
 
 
 //APP LISTENER FOR NODEMON CONFIRMATION
