@@ -2,15 +2,25 @@ const writterRoute = require("express").Router();
 const Writter = require("../model/posts");
 
 writterRoute.get("/", (req, res) => {
-  res.send("Hello world this is me working on something stupid");
+  Writter.find((err, items) => {
+    if (err) {
+      res.status(400).json({
+        msg: "this did not work",
+        ERROR: `${err}`,
+      });
+    } else {
+      res.status(200).json({
+        response: items,
+      });
+    }
+  });
 });
-
 
 //FOUND  THE ANSWER TO NESTED ARRAY OBJECTS IN MONGODB
 //NOW WE HAVE TO SHORT HAND THE BELOW ROUTE.
 
 writterRoute.post("/post", (req, res) => {
-  console.log("THIS IS THE BEGINING ", req.body)
+  console.log("THIS IS THE BEGINING ", req.body);
   const nwPost = new Writter({
     person: {
       age: req.body.person.age,
@@ -21,8 +31,7 @@ writterRoute.post("/post", (req, res) => {
         zip: req.body.person.address.zip,
       },
     },
-  });
-  console.log(nwPost.person, "THIS IS IMPORTATN:")
+  })
   nwPost
     .save()
     .then((post) => {
@@ -38,5 +47,23 @@ writterRoute.post("/post", (req, res) => {
       });
     });
 });
+
+
+
+writterRoute.delete("/delete", (req, res) => {
+  Writter
+  .deleteMany({})
+  .then((removed) =>
+    res.json({
+      msg: " All are removed",
+      deletedItem: removed,
+    })
+  )
+  .catch((err) =>
+    res.status(400).json({
+      ERROR: err,
+    })
+  );
+})
 
 module.exports = writterRoute;

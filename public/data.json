@@ -1,0 +1,16 @@
+{
+  "blog_posts": {
+    "slug": "Motherboards",
+    "title": "Fundamentals of the Motherboard",
+    "category": ["Hardware", "Software", "Certifications"],
+    "tag": "Not sure what here",
+    "content": "I'm baby art party vaporware kinfolk lomo salvia. Yuccie blog sustainable austin hammock tumeric. Tattooed kale chips sartorial, scenester irony poutine marfa chicharrones. Unicorn chambray vexillologist gochujang, pabst yuccie selfies leggings mlkshk hammock meh normcore biodiesel hella. Iceland umami portland keytar street art letterpress actually occupy activated charcoal celiac health goth raclette man bun.",
+    "author": {
+        "first_name": "Joe",
+        "last_name": "Dirt"
+    },
+    "published": true,
+    "thumbnail_image": "./images/social-media-wordpress.jpeg",
+    "header_image": "./images/wordpressBarber.jpeg"
+  }
+}

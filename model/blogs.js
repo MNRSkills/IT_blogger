@@ -2,27 +2,21 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-// const author = new Schema({
-//   fName: { type: String },
-//   phone: { type: Number },
-//   email: { type: String },
-// });
-
-const newBlog = new Schema(
-  {
-    title: "String",
-    subtitle: "String",
-    author: [
-      {
-        fName: "String",
-        phone: "String",
-        email: "String",
-      },
-    ],
+const newBlog = new Schema({
+  blog_post: {
+    slug: String,
+    title: String,
+    category: [String],
+    tag: String,
+    content: String,
+    author: {
+      first_name: String,
+      last_name: String,
+    },
+    published: Boolean,
+    thumbnail_image: String,
+    header_image: String
   },
-  {
-    timestamps: true,
-  }
-);
+});
 
 module.exports = mongoose.model("BlogPost", newBlog);

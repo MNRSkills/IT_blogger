@@ -1,6 +1,6 @@
 const blogRouter = require("express").Router();
 const BlogPost = require("../model/blogs");
-const { ObjectId } = require("mongodb");
+const { cloudinary } = require("../utils/utils")
 
 blogRouter.get("/", async (req, res) => {
   BlogPost.find((err, items) => {
@@ -17,16 +17,22 @@ blogRouter.get("/", async (req, res) => {
 });
 
 
-blogRouter.post("/test", (req, res) => {
-  console.log("REQ:", req.body);
+blogRouter.post("/blog_posts", (req, res) => {
   const post = new BlogPost({
-    title: req.body.title,
-    subtitle: req.body.subtitle,
-    author: [{
-      fName: req.body.author.fName,
-      phone: req.body.author.phone,
-      email: req.body.author.email
-    }]
+    blog_post: {
+      slug: req.body.blog_post.slug,
+      title: req.body.blog_post.title,
+      category: [req.body.blog_post.category],
+      tag: req.body.blog_post.tag,
+      content: req.body.blog_post.content,
+      author: {
+        first_name: req.body.blog_post.author.first_name,
+        last_name: req.body.blog_post.author.last_name,
+      },
+      published: req.body.blog_post.published,
+      thumbnail_image: req.body.blog_post.thumbnail_image,
+      header_image: req.body.blog_post.header_image,
+    },
   });
   post
     .save()
