@@ -1,11 +1,18 @@
 const express = require("express");
+// const bodyParser = express.json();
+const bp = require("body-parser");
+const fileUpload = require("express-fileUpload");
 const mongoose = require("mongoose");
 const blogRouter = require("./route/blogs");
 const writterRouter = require("./route/writter")
 require("dotenv").config();
 
 const app = express();//express instant
-app.use(express.json());//new body-parser
+app.use(fileUpload({ useTempFiles: true }));
+app.use(bp.json());
+app.use(bp.urlencoded({
+  extended: true
+}));//new body-parser
 
 
 const PORT = process.env.PORT; //best practice makes me have a default port
