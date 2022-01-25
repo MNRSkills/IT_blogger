@@ -36,6 +36,7 @@ app.use("/blogs", blogRouter);
 app.use("/writter", writterRouter);
 
 
+
 //APP LISTENER FOR NODEMON CONFIRMATION
 app.listen(PORT, () => {
   console.log(`The server is up on port: ${PORT}`);
