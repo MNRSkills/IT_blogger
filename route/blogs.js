@@ -52,22 +52,28 @@ blogRouter.post("/blog_posts", async (req, res) => {
 
 blogRouter.put("/:id/update", (req, res) => {
   const params = req.params.id;
-  console.log("this is the params", params)
   try {
-    BlogPost.findByIdAndUpdate(params,{
-      title: req.body.title
-    }, {new: true})
-    .then(update => {
+    BlogPost.findByIdAndUpdate(
+      params,
+      {
+        title: req.body.title,
+        category: [req.body.category],
+        tag: req.body.tag,
+        content: req.body.content,
+        published: req.body.published,
+      },
+      { new: true }
+    ).then((update) => {
       res.status(200).json({
         msg: "This did work",
         UPDATE: update,
-      })
-    })
+      });
+    });
   } catch (error) {
     res.status(400).json({
       erroMSG: "this is not good",
-      Error: `${error}`
-    })
+      Error: `${error}`,
+    });
   }
 });
 
